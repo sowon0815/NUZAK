@@ -12,11 +12,16 @@ public class MainActivity extends AppCompatActivity {
     Fragment1 fragment1;
     Fragment2 fragment2;
     Fragment3 fragment3;
+    private DBOpenHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new DBOpenHelper(this);
+        dbHelper.open();
+        dbHelper.create();
 
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();

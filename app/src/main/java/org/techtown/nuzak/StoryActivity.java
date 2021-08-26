@@ -25,10 +25,14 @@ public class StoryActivity  extends AppCompatActivity {
 
     Button returnButton;
 
+    DBOpenHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
+
+        dbHelper = new DBOpenHelper(this);
 
         image = new ArrayList<>();
         text = new ArrayList<>();
