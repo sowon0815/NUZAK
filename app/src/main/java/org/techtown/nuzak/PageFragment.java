@@ -1,5 +1,7 @@
 package org.techtown.nuzak;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.techtown.nuzak.R;
+
+import java.io.File;
 
 public class PageFragment extends Fragment {
 
@@ -27,8 +31,6 @@ public class PageFragment extends Fragment {
         textView.setText(text, 0, text.length);
 
         imageView.setImageResource(bundle.getInt("image"));
-
-
 
         return rootView;
     }

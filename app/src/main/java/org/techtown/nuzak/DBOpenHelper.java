@@ -2,11 +2,14 @@ package org.techtown.nuzak;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBOpenHelper {
     private static final String DATABASE_NAME = "InnerDatabase(SQLite).db";
@@ -55,5 +58,20 @@ public class DBOpenHelper {
         String sql = "insert into " + DataBases.createDB._TABLENAME0 + "(title, text, image) values ('" + title + "', '" + text + "', '" + image+"');";
 
         mDB.execSQL(sql);
+    }
+
+    public Story getStoryData(int id){
+        String sql = "select * from " + DataBases.createDB._TABLENAME0 + "  where _id = " + id;
+
+        Story storyData = new Story();
+
+        Cursor mCur = mDB.rawQuery(sql, null);
+        mCur.moveToFirst();
+        storyData.setId(mCur.getInt(0));
+        storyData.setTitle(mCur.getString(1));
+        storyData.setText(mCur.getString(2));
+        storyData.setImage(mCur.getString(3));
+
+        return storyData;
     }
 }

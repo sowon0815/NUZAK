@@ -65,6 +65,7 @@ public class TransferredActivity extends AppCompatActivity {
         String Text = intent.getExtras().getString("Text");
 
         File file = new File(myDir, fileName);
+
         Bitmap transferredBmp = BitmapFactory.decodeFile(file.getAbsolutePath());
 
         TextView titleView = findViewById(R.id.titleView);
