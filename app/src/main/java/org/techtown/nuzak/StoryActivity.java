@@ -42,9 +42,8 @@ public class StoryActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
 
-        //intent = getIntent();
-        //int id = intent.getExtras().getInt("id");
-        int id = 6;
+        intent = getIntent();
+        int id = intent.getExtras().getInt("id");
 
         dbHelper = new DBOpenHelper(this);
 

@@ -189,7 +189,7 @@ public class Fragment2 extends Fragment {
 
                     saveImage(mTransferredImage);
 
-                    final String urlStr = "http://c9e6-35-194-248-251.ngrok.io/story/" + taleTitle.getText().toString();
+                    final String urlStr = "http://a8ab-35-194-88-48.ngrok.io/story/" + taleTitle.getText().toString();
 
                     try{
                         Thread a = new Thread(new Runnable() {
@@ -209,6 +209,9 @@ public class Fragment2 extends Fragment {
                     intent.putExtra("Title", taleTitle.getText().toString());
                     intent.putExtra("FileName", imageName);
                     intent.putExtra("Text", text);
+
+                    mContentImageView.setImageResource(0);
+                    taleTitle.setText("");
 
                     startActivity(intent);
 

@@ -43,10 +43,9 @@ public class TransferredActivity extends AppCompatActivity {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //이제 작성해야함
-                //이거 누르면 카드 하나 추가하는 걸로...
-                //아니면 그냥 돌아가는 거라도!
-
+                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }

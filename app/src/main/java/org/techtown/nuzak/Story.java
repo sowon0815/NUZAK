@@ -6,6 +6,12 @@ public class Story {
     String Text;
     String Image;
 
+    public Story(){}
+    public Story(String Title, String Image){
+        this.Title = Title;
+        this.Image = Image;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
