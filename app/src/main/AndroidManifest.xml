@@ -20,7 +20,7 @@
 
         <activity
             android:name=".TransferredActivity"
-            android:label="Transferred Image">
+            android:label="NUZAK">
         </activity>
         <activity android:name="org.techtown.nuzak.MainActivity">
             <intent-filter>

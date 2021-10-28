@@ -189,7 +189,7 @@ public class Fragment2 extends Fragment {
 
                     saveImage(mTransferredImage);
 
-                    final String urlStr = "http://a8ab-35-194-88-48.ngrok.io/story/" + taleTitle.getText().toString();
+                    final String urlStr = "http://14.39.162.45:5000/story/" + taleTitle.getText().toString();
 
                     try{
                         Thread a = new Thread(new Runnable() {
