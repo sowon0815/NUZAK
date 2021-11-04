@@ -18,7 +18,7 @@
         android:id="@+id/tab3"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="마이페이지"/>
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="도움말"/>
 
 </menu>
