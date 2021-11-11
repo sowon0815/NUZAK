@@ -61,7 +61,19 @@ public class TransferredActivity extends AppCompatActivity {
 
         String fileName = intent.getExtras().getString("FileName");
         String Title = intent.getExtras().getString("Title");
-        String Text = intent.getExtras().getString("Text");
+        String str = intent.getExtras().getString("Text");
+        int level = intent.getExtras().getInt("Level");
+
+
+        String [] fairytale = str.split("\\*");
+        String Text = fairytale[0];
+        String keyword = fairytale[fairytale.length-1];
+
+        System.out.println("가나다라마바사\n");
+        System.out.println("String: " + str + "\n");
+        System.out.println("Text: " + Text + "\n");
+        System.out.println("Keyword: " + keyword + "\n");
+        System.out.println("가나다라마바사\n");
 
         File file = new File(myDir, fileName);
 
@@ -75,13 +87,13 @@ public class TransferredActivity extends AppCompatActivity {
         transferredImgView.setImageBitmap(transferredBmp);
         creationDate.setText(fileName);
 
-        insertStory(Title, Text, fileName);
+        insertStory(Title, Text, fileName, keyword, level);
     }
 
-    public void insertStory(String title, String text, String image){
+    public void insertStory(String title, String text, String image, String keyword, int level) {
         DBOpenHelper dbHelper = new DBOpenHelper(this);
 
-        dbHelper.insertColumn(title, text, image);
+        dbHelper.insertColumn(title, text, image, keyword, level);
     }
 
 }

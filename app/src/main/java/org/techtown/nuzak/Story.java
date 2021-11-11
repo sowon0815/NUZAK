@@ -5,6 +5,8 @@ public class Story {
     String Title;
     String Text;
     String Image;
+    String Keyword;
+    int level;
 
     public Story(){}
     public Story(String Title, String Image){
@@ -28,6 +30,10 @@ public class Story {
         Image = image;
     }
 
+    public void setKeyword(String keyword) { Keyword = keyword; }
+
+    public void setLevel(int level) {this.level = level;}
+
     public int getId() {
         return id;
     }
@@ -43,4 +49,8 @@ public class Story {
     public String getImage() {
         return Image;
     }
+
+    public String getKeyword() { return Keyword; }
+
+    public int getLevel() { return this.level; }
 }

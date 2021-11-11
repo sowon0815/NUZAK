@@ -43,6 +43,7 @@
                     android:layout_marginLeft="10sp"
                     android:layout_weight="14"
                     android:background="#FFFFFF"
+                    android:fontFamily="@font/nanumgothicbold"
                     android:gravity="center_vertical"
                     android:text="몽구"
                     android:textColor="#000000"

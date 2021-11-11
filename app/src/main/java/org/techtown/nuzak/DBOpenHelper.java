@@ -54,8 +54,8 @@ public class DBOpenHelper {
         mDB.close();
     }
 
-    public void insertColumn(String title, String text , String image){
-        String sql = "insert into " + DataBases.createDB._TABLENAME0 + "(title, text, image) values ('" + title + "', '" + text + "', '" + image+"');";
+    public void insertColumn(String title, String text , String image, String keyword, int level){
+        String sql = "insert into " + DataBases.createDB._TABLENAME0 + "(title, text, image, keyword, level) values ('" + title + "', '" + text + "', '" + image + "', '" + keyword + "', " + level + ");";
 
         mDB.execSQL(sql);
     }
@@ -71,6 +71,8 @@ public class DBOpenHelper {
         storyData.setTitle(mCur.getString(1));
         storyData.setText(mCur.getString(2));
         storyData.setImage(mCur.getString(3));
+        storyData.setKeyword(mCur.getString(4));
+        storyData.setLevel(mCur.getInt(5));
 
         return storyData;
     }

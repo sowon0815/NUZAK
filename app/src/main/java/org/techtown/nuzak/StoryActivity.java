@@ -52,17 +52,18 @@ public class StoryActivity  extends AppCompatActivity {
         imageArray = new ArrayList<Integer>();
         textArray = new ArrayList<char []>();
 
-        this.createTextImage(storyData.getText());
+        this.createImage();
+        this.createText(storyData.getText());
 
         pager = findViewById(R.id.pager);
         pager.setOffscreenPageLimit(2);
 
         pageAdapter = new ScreenSlidePagerAdapter(this);
 
-        CoverFragment coverFragment = createCover(storyData.getTitle(), storyData.getImage());
+        CoverFragment coverFragment = createCover(storyData.getTitle(), storyData.getImage()); //표지 fragment, 동화 제목과 이미지 파일명 전달
         pageAdapter.addItem(coverFragment);
 
-        int bgImage = (int) (Math.random() * 4);
+        int bgImage = (int) (Math.random() * 4); //배경 이미지 4가지 중 랜덤으로 고르기
 
         for(int i=0;i<textArray.size();i++) {
             PageFragment fragment = new PageFragment();
@@ -73,8 +74,12 @@ public class StoryActivity  extends AppCompatActivity {
 
             fragment.setArguments(bundle);
 
-            pageAdapter.addItem(fragment);
+            pageAdapter.addItem(fragment); //페이지 추가
         }
+
+        String keyword = storyData.getKeyword();
+        KeywordFragment keyWordFragment = createKeyword(keyword);
+        pageAdapter.addItem(keyWordFragment);
 
         pager.setAdapter(pageAdapter);
 
@@ -99,22 +104,28 @@ public class StoryActivity  extends AppCompatActivity {
         }
     }
 
-    void createTextImage(String text){
-        int cnt = 0;
-        String s = "";
+    void createText(String text){
         StringTokenizer st = new StringTokenizer(text, "\n");
 
-        for(int i=0;i<st.countTokens();i++){
-            cnt++;
-            s+=st.nextToken();
-            if(cnt==1) {
-                this.textArray.add(s.toCharArray());
-                cnt = 0;
-                s = "";
-            }
-        }
-        if(cnt>0) this.textArray.add(s.toCharArray());
+        String s = "";
+        int count = 0;
+        int token = st.countTokens();
+        int line = 1;
 
+        for(int i=0;i<token;i++){
+            count=0;
+            s = "";
+            for(int j=0;j<line;j++){
+                count++;
+                s+=st.nextToken();
+            }
+            this.textArray.add(s.toCharArray());
+        }
+
+        if(0<count&&count<line) this.textArray.add(s.toCharArray());
+    }
+
+    void createImage(){
         this.imageArray.add(R.drawable.page1);
         this.imageArray.add(R.drawable.page2);
         this.imageArray.add(R.drawable.page3);
@@ -143,7 +154,7 @@ public class StoryActivity  extends AppCompatActivity {
             return items.size();
         }
     }
-    CoverFragment createCover(String Title, String image){
+    CoverFragment createCover(String Title, String image){ //표지 fragment 만드는 메서드
         CoverFragment coverFragment = new CoverFragment();
 
         bundle = new Bundle(); //프래그먼트에 이미지랑 텍스트 정보 전달할 번들
@@ -154,5 +165,28 @@ public class StoryActivity  extends AppCompatActivity {
         coverFragment.setArguments(bundle);
 
         return coverFragment;
+    }
+    KeywordFragment createKeyword(String keyword){
+        KeywordFragment keywordFragment = new KeywordFragment();
+
+        StringTokenizer st = new StringTokenizer(keyword, ",");
+
+        String s = "";
+        String temp;
+
+        while(st.hasMoreTokens()){
+            temp = st.nextToken();
+            if(temp.charAt(0) == ' ') temp = temp.substring(1);
+            else if(temp.charAt(temp.length()-1) == ' ') temp = temp.substring(0, temp.length()-1);
+
+            s += temp+"\n";
+        }
+
+        bundle = new Bundle();
+        bundle.putCharArray("text", s.toCharArray());
+
+        keywordFragment.setArguments(bundle);
+
+        return keywordFragment;
     }
 }

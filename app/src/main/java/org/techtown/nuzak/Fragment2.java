@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +71,8 @@ public class Fragment2 extends Fragment {
     private RadioGroup mRadioGroup;
     private Button mTransferButton;
 
+    private RadioGroup radioGroup;
+
     private final static int REQUEST_CONTENT_IMG = 1;
     private final static int REQUEST_STYLE_IMG = 2;
 
@@ -95,6 +98,7 @@ public class Fragment2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment2, container, false);
         taleTitle = rootView.findViewById(R.id.taleTitle);
+        radioGroup = rootView.findViewById(R.id.radioGroup);
 /*
         uploadButton = rootView.findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(new View.OnClickListener() {
@@ -161,10 +165,26 @@ public class Fragment2 extends Fragment {
         mTransferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mContentImage == null) {
-                    Toast.makeText(getActivity(), "사진이 선택되지 않았습니다", Toast. LENGTH_SHORT).show();
+                if (taleTitle.getText().toString().equals("") || taleTitle.getText().toString() == null) {
+                    Toast.makeText(getActivity(), "제목을 입력하세요", Toast. LENGTH_SHORT).show();
                     return;
                 }
+                String title = taleTitle.getText().toString();
+                if (title.contains("\'")||title.contains("*")||title.contains("/")||title.contains("\\")||title.contains(":")){
+                    Toast.makeText(getActivity(), "제목에 ', *, /, \\, :를 입력할 수 없습니다", Toast. LENGTH_SHORT).show();
+                    return;
+                }
+                if (mContentImage == null) {
+                    Toast.makeText(getActivity(), "사진을 입력하세요", Toast. LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(getActivity(), "난이도를 선택하세요", Toast. LENGTH_SHORT).show();
+                    return;
+                }
+
+                Toast.makeText(getActivity(), "동화 창작중", Toast. LENGTH_LONG).show();
 
                 // init some key things
                 Interpreter predictInterpreter;
@@ -189,7 +209,24 @@ public class Fragment2 extends Fragment {
 
                     saveImage(mTransferredImage);
 
-                    final String urlStr = "http://14.39.162.45:5000/story/" + taleTitle.getText().toString();
+                    int level = 4;
+                    //final String urlStr = "http://14.39.162.45:5000/story/" + taleTitle.getText().toString(); - 소원이 집
+                    //http://192.168.52.67:8080/ - 신촌 스터디룸
+                    final String urlStr;
+                    int id = radioGroup.getCheckedRadioButtonId();
+                    RadioButton rb = (RadioButton) getActivity().findViewById(id);
+                    String checked = rb.getText().toString();
+                    if (checked.equals("상")){
+                        level = 3;
+                        urlStr = "http://192.168.52.67:8080/3/" + taleTitle.getText().toString();
+                    }else if (checked.equals("중")){
+                        level = 2;
+                        urlStr = "http://192.168.52.67:8080/2/" + taleTitle.getText().toString();
+                    }
+                    else{ //하
+                        level = 1;
+                        urlStr = "http://192.168.52.67:8080/1/" + taleTitle.getText().toString();
+                    }
 
                     try{
                         Thread a = new Thread(new Runnable() {
@@ -205,10 +242,12 @@ public class Fragment2 extends Fragment {
                     catch(Exception e){
                         System.out.println("예외가 발생하였습니다.");
                     }
+
                     Intent intent = new Intent(getActivity(), TransferredActivity.class);
                     intent.putExtra("Title", taleTitle.getText().toString());
                     intent.putExtra("FileName", imageName);
                     intent.putExtra("Text", text);
+                    intent.putExtra("Level", level);
 
                     mContentImageView.setImageResource(0);
                     taleTitle.setText("");
@@ -245,7 +284,7 @@ public class Fragment2 extends Fragment {
     protected String getDate() {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm_");
         return mFormat.format(date);
     }
 
