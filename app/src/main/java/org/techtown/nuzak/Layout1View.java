@@ -20,6 +20,7 @@ public class Layout1View extends LinearLayout {
     TextView textView;
     ImageView imageView;
     Button readButton;
+    ImageView levelView;
 
     Context context;
 
@@ -44,6 +45,7 @@ public class Layout1View extends LinearLayout {
         textView = (TextView) findViewById(R.id.title);
         imageView = (ImageView) findViewById(R.id.imageView);
         readButton = (Button) findViewById(R.id.readButton);
+        levelView = (ImageView) findViewById(R.id.levelView);
 
         this.context = context;
     }
@@ -73,5 +75,17 @@ public class Layout1View extends LinearLayout {
                 context.startActivity(intent);
             }
         });
+    }
+
+    public void setStoryLevel(int level){
+        if(level==1){
+            levelView.setImageResource(R.drawable.level_1);
+        }
+        else if(level==2){
+            levelView.setImageResource(R.drawable.level_2);
+        }
+        else{
+            levelView.setImageResource(R.drawable.level_3);
+        }
     }
 }

@@ -36,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="254dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10sp"
@@ -49,6 +49,14 @@
                     android:textColor="#000000"
                     android:textSize="30sp" />
 
+                <ImageView
+                    android:id="@+id/levelView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/level_3" />
+
             </LinearLayout>
 
             <Button
@@ -56,8 +64,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/nanumgothicbold"
                 android:shadowColor="#FFFFFF"
-                android:text="read" />
+                android:text="read"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

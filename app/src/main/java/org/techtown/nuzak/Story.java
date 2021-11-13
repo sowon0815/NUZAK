@@ -9,9 +9,10 @@ public class Story {
     int level;
 
     public Story(){}
-    public Story(String Title, String Image){
+    public Story(String Title, String Image, int level){
         this.Title = Title;
         this.Image = Image;
+        this.level = level;
     }
 
     public void setId(int id) {

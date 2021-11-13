@@ -56,7 +56,8 @@ public class Fragment1 extends Fragment {
             resultset.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
             String str_title = resultset.getString(1);   // 첫번째 속성
             String str_image = resultset.getString(3);   // 세번째 속성
-            adapter.addItem(new Story(str_title, str_image));
+            int level = resultset.getInt(5);
+            adapter.addItem(new Story(str_title, str_image, level));
         }
 
         listView.setAdapter(adapter);
@@ -112,6 +113,7 @@ public class Fragment1 extends Fragment {
             view.setTitle(item.getTitle());
             view.setImage(item.getImage());
             view.setStoryId(position);
+            view.setStoryLevel(item.getLevel());
 
             return view;
         }

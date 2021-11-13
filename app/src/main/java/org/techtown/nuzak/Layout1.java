@@ -48,6 +48,8 @@ public class Layout1 extends LinearLayout {
         textView.setText(title);
     }
 
+
+
     public void showStory(final int resId){
         readButton.setOnClickListener(new OnClickListener() {
             @Override
