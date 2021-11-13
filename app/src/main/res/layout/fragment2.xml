@@ -149,11 +149,11 @@
 
                         <ImageView
                             android:id="@+id/style_img"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
                             android:scaleType="fitCenter"
                             android:visibility="visible"
-                            app:srcCompat="@drawable/page1" />
+                            app:srcCompat="@android:drawable/screen_background_light" />
                     </FrameLayout>
 
                 </LinearLayout>
