@@ -1,5 +1,5 @@
 import openai
-openai.api_key = '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'
+openai.api_key = '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'
 
 from flask import Flask
 app = Flask(__name__)
@@ -8,8 +8,8 @@ app = Flask(__name__)
 def index():
    return "hi"
 
-@app.route('/1',defaults={'data':'index'})
-@app.route('/1/<data>')
+@app.route('/3',defaults={'data':'index'})
+@app.route('/3/<data>')
 def boards1(data):
   response1 = openai.Completion.create(
     model='curie:ft-ewha-womans-university-2021-11-04-06-46-07',
@@ -31,7 +31,17 @@ def boards1(data):
     presence_penalty=0.0,
     stop=["\n"]
   )
-
+  while response2.choices[0].text=="":
+    response2 = openai.Completion.create(
+      model='curie:ft-ewha-womans-university-2021-11-04-06-21-39',
+      prompt=taletext,
+      temperature=0.3,
+      max_tokens=60,
+      top_p=1.0,
+      frequency_penalty=0.78,
+      presence_penalty=0.0,
+      stop=["\n"]
+    )
   return response1.choices[1].text + "*****" + response2.choices[0].text
 
 @app.route('/2',defaults={'data':'index'})
@@ -58,11 +68,21 @@ def boards2(data):
     presence_penalty=0.0,
     stop=["\n"]
   )
-
+  while response2.choices[0].text=="":
+    response2 = openai.Completion.create(
+      model='curie:ft-ewha-womans-university-2021-11-04-06-21-39',
+      prompt=taletext,
+      temperature=0.3,
+      max_tokens=60,
+      top_p=1.0,
+      frequency_penalty=0.78,
+      presence_penalty=0.0,
+      stop=["\n"]
+    )
   return response1.choices[1].text + "*****" + response2.choices[0].text
 
-@app.route('/3',defaults={'data':'index'})
-@app.route('/3/<data>')
+@app.route('/1',defaults={'data':'index'})
+@app.route('/1/<data>')
 def boards3(data):
   response1 = openai.Completion.create(
     model='curie:ft-ewha-womans-university-2021-11-04-08-06-13',
@@ -84,7 +104,17 @@ def boards3(data):
     presence_penalty=0.0,
     stop=["\n"]
   )
-
+  while response2.choices[0].text=="":
+    response2 = openai.Completion.create(
+      model='curie:ft-ewha-womans-university-2021-11-04-06-21-39',
+      prompt=taletext,
+      temperature=0.3,
+      max_tokens=60,
+      top_p=1.0,
+      frequency_penalty=0.78,
+      presence_penalty=0.0,
+      stop=["\n"]
+    )
   return response1.choices[1].text + "*****" + response2.choices[0].text
 
 if __name__ == '__main__':  
