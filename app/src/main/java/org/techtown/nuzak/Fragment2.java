@@ -218,14 +218,14 @@ public class Fragment2 extends Fragment {
                     String checked = rb.getText().toString();
                     if (checked.equals("상")){
                         level = 3;
-                        urlStr = "http://192.168.52.67:8080/3/" + taleTitle.getText().toString();
+                        urlStr = "http://14.39.162.45:5000/3/" + taleTitle.getText().toString();
                     }else if (checked.equals("중")){
                         level = 2;
-                        urlStr = "http://192.168.52.67:8080/2/" + taleTitle.getText().toString();
+                        urlStr = "http://14.39.162.45:5000/2/" + taleTitle.getText().toString();
                     }
                     else{ //하
                         level = 1;
-                        urlStr = "http://192.168.52.67:8080/1/" + taleTitle.getText().toString();
+                        urlStr = "http://14.39.162.45:5000/1/" + taleTitle.getText().toString();
                     }
 
                     try{
