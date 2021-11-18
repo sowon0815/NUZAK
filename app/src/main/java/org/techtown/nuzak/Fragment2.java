@@ -210,22 +210,21 @@ public class Fragment2 extends Fragment {
                     saveImage(mTransferredImage);
 
                     int level = 4;
-                    //final String urlStr = "http://14.39.162.45:5000/story/" + taleTitle.getText().toString(); - 소원이 집
-                    //http://192.168.52.67:8080/ - 신촌 스터디룸
+
                     final String urlStr;
                     int id = radioGroup.getCheckedRadioButtonId();
                     RadioButton rb = (RadioButton) getActivity().findViewById(id);
                     String checked = rb.getText().toString();
                     if (checked.equals("상")){
                         level = 3;
-                        urlStr = "http://14.39.162.45:5000/3/" + taleTitle.getText().toString();
+                        urlStr = "http://플라스크 주소/3/" + taleTitle.getText().toString();
                     }else if (checked.equals("중")){
                         level = 2;
-                        urlStr = "http://14.39.162.45:5000/2/" + taleTitle.getText().toString();
+                        urlStr = "http://플라스크 주소/2/" + taleTitle.getText().toString();
                     }
                     else{ //하
                         level = 1;
-                        urlStr = "http://14.39.162.45:5000/1/" + taleTitle.getText().toString();
+                        urlStr = "http://플라스크 주소/1/" + taleTitle.getText().toString();
                     }
 
                     try{
