@@ -1,5 +1,5 @@
 import openai
-openai.api_key = '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'
+openai.api_key = 'your_api_key'
 
 from flask import Flask
 app = Flask(__name__)
